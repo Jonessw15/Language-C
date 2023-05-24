@@ -1,1 +1,1 @@
-# Language-C
+# Language C
