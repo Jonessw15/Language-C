@@ -1,0 +1,15 @@
+C:\Users\jhona\OneDrive\Documentos\Programação\C#\Projeto Aula\bin\Debug\net7.0\Projeto Aula.exe
+C:\Users\jhona\OneDrive\Documentos\Programação\C#\Projeto Aula\bin\Debug\net7.0\Projeto Aula.deps.json
+C:\Users\jhona\OneDrive\Documentos\Programação\C#\Projeto Aula\bin\Debug\net7.0\Projeto Aula.runtimeconfig.json
+C:\Users\jhona\OneDrive\Documentos\Programação\C#\Projeto Aula\bin\Debug\net7.0\Projeto Aula.dll
+C:\Users\jhona\OneDrive\Documentos\Programação\C#\Projeto Aula\bin\Debug\net7.0\Projeto Aula.pdb
+C:\Users\jhona\OneDrive\Documentos\Programação\C#\Projeto Aula\obj\Debug\net7.0\Projeto Aula.csproj.AssemblyReference.cache
+C:\Users\jhona\OneDrive\Documentos\Programação\C#\Projeto Aula\obj\Debug\net7.0\Projeto Aula.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\jhona\OneDrive\Documentos\Programação\C#\Projeto Aula\obj\Debug\net7.0\Projeto Aula.AssemblyInfoInputs.cache
+C:\Users\jhona\OneDrive\Documentos\Programação\C#\Projeto Aula\obj\Debug\net7.0\Projeto Aula.AssemblyInfo.cs
+C:\Users\jhona\OneDrive\Documentos\Programação\C#\Projeto Aula\obj\Debug\net7.0\Projeto Aula.csproj.CoreCompileInputs.cache
+C:\Users\jhona\OneDrive\Documentos\Programação\C#\Projeto Aula\obj\Debug\net7.0\Projeto Aula.dll
+C:\Users\jhona\OneDrive\Documentos\Programação\C#\Projeto Aula\obj\Debug\net7.0\refint\Projeto Aula.dll
+C:\Users\jhona\OneDrive\Documentos\Programação\C#\Projeto Aula\obj\Debug\net7.0\Projeto Aula.pdb
+C:\Users\jhona\OneDrive\Documentos\Programação\C#\Projeto Aula\obj\Debug\net7.0\Projeto Aula.genruntimeconfig.cache
+C:\Users\jhona\OneDrive\Documentos\Programação\C#\Projeto Aula\obj\Debug\net7.0\ref\Projeto Aula.dll

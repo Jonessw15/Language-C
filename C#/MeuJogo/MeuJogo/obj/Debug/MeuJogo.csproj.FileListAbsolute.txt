@@ -1,0 +1,8 @@
+C:\Users\jhona\OneDrive\Documentos\Programação\C#\MeuJogo\MeuJogo\bin\Debug\MeuJogo.exe.config
+C:\Users\jhona\OneDrive\Documentos\Programação\C#\MeuJogo\MeuJogo\bin\Debug\MeuJogo.exe
+C:\Users\jhona\OneDrive\Documentos\Programação\C#\MeuJogo\MeuJogo\bin\Debug\MeuJogo.pdb
+C:\Users\jhona\OneDrive\Documentos\Programação\C#\MeuJogo\MeuJogo\obj\Debug\MeuJogo.csproj.AssemblyReference.cache
+C:\Users\jhona\OneDrive\Documentos\Programação\C#\MeuJogo\MeuJogo\obj\Debug\MeuJogo.csproj.SuggestedBindingRedirects.cache
+C:\Users\jhona\OneDrive\Documentos\Programação\C#\MeuJogo\MeuJogo\obj\Debug\MeuJogo.csproj.CoreCompileInputs.cache
+C:\Users\jhona\OneDrive\Documentos\Programação\C#\MeuJogo\MeuJogo\obj\Debug\MeuJogo.exe
+C:\Users\jhona\OneDrive\Documentos\Programação\C#\MeuJogo\MeuJogo\obj\Debug\MeuJogo.pdb
