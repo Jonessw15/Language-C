@@ -8,10 +8,13 @@ int main() {
         printf("%c\n", palavra[i]);
     } */
 
-    char palavra[60];
+    char palavra[12] = "Programacao";
 
-    scanf("%s", palavra);
+    for (int i = 0; palavra[i] != '\0'; i++) {
+        printf("%c\n", palavra[i]);
+    }
 
+    /* scanf("%s", palavra); */
 
     return 0;
 
