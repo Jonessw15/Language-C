@@ -1,0 +1,24 @@
+exemplo[strcsnp(exemplo, "\n")] = '\0';
+
+token = strtok(exemplo, " ");
+
+while (token != NULL) {
+    printf("%s", token);
+    token = strtok(NULL, " ");
+}
+
+// MANIPULAÇÃO DE STRING 
+
+strcpy(exemplo, exemplo2); COPIA A STRING 2 PARA STRING 1;
+
+strncpy(exemplo, exemplo2, 3); COPIA "n" CARACTERES DA STRING 2 PARA STRING 1;
+
+strcat(exemplo, exemplo2); CONCATENA A STRING 2 PARA STRING 1;
+
+strncat(exemplo, exemplo2); CONCATENA "n" CARACTERES DA STRING 2 PARA STRING 1;
+
+// COMPARAÇÃO DE STRING
+
+strcmp(exemplo, exemplo2); COMPARA AS DUAS STRINGS SE FOREM VERDADEIRAS RETORNA "0";
+
+strncmp(exemplo, exemplo2, 3); COMPARA "n" CARACTERES DAS DUAS STRINGS SE FOREM VERDADEIRAS RETORNA "0";

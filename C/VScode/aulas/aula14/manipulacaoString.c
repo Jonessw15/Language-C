@@ -26,17 +26,17 @@ int main() {
     const char str[] = "Fundamentos de Programacao";
     const char s[] = " ";
 
-    /* char *token;
+    char *token;
 
     token = strtok(str, s);
 
     while (token != NULL) {
-        printf("%s", token);
+        printf("%s\n", token);
         token = strtok(NULL, s);
-    } */
+    }
 
-    printf("%d", strlen(str));
-
+/*     printf("%d", strlen(str));
+ */
 
 
 
