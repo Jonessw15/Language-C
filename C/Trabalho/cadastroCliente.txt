@@ -1,0 +1,13 @@
+
+
+ID do cliente: 1
+Nome do cliente: Jones
+E-mail do cliente: jones@gmail.com
+Endereco do cliente: Mulungu
+Telefone do cliente: 690196795
+
+ID do cliente: 1
+Nome do cliente: Claiton
+E-mail do cliente: claiton@gmail.com
+Endereco do cliente: Crateus
+Telefone do cliente: 222977829
