@@ -122,6 +122,8 @@ int main() {
         printf("1) Cadastrar produtos\n");
         printf("2) Lista produtos\n");
         printf("3) Cadastrar clientes\n");
+        printf("4) Lista de clientes\n");
+        printf("5) Realizar um pedido\n");
         printf("11) Sair do programa >_<");
 
         printf("\nEscolha: ");
