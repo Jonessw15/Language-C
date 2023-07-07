@@ -1,8 +1,6 @@
 #include <stdio.h>
 #include <windows.h>
 
-void perguntas(int);
-
 typedef struct {
     char nomeProduto[50];
     char descricao[300];
@@ -27,6 +25,8 @@ typedef struct {
 } Pedidos;
 
 /* FUNÇÕES */
+
+void organizarPerguntas(int);
 
 Ifood cadastrarProdutos() {
 
@@ -104,7 +104,7 @@ int main() {
         printf("Erro ao abrir arquivo");
         printf("\nCriando arquivo...");
 
-        FILE *arquivo = fopen("cadastro.txt", "w");
+        FILE *cliente = fopen("cadastroCliente.txt", "w");
 
         return 2;
     }
@@ -145,6 +145,12 @@ int main() {
             case 3:
                 printf("\nCadastro de clientes");
                 break;
+            case 4:
+                printf("\nLista de clientes");
+                break;
+            case 5:
+                printf("\nRealizar pedido");
+                break;
             case 11:
                 printf("Tchau\n");
                 break;
@@ -166,6 +172,15 @@ int main() {
         } else if (caso == 3) {
             customers = cadastrarClientes();
             fprintf(cliente, "\n\nID do cliente: %d\nNome do cliente: %s\nE-mail do cliente: %s\nEndereco do cliente: %s\nTelefone do cliente: %d",customers.ID, customers.nome, customers.email, customers.endereco, customers.telefone);
+        } else if (caso == 4) {
+
+        } else if (caso == 5) {
+            cliente = fopen("cadastroCliente.txt", "r+");
+            char c;
+            do {
+                c = fgetc(cliente);
+                printf("%c", c);
+            } while (c != EOF);
         }
 
     }
