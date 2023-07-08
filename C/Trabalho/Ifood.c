@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 #include <windows.h>
 
 typedef struct {
@@ -30,7 +32,6 @@ void organizarPerguntas(int);
 
 Ifood cadastrarProdutos() {
 
-    static int idProduto = 1;
     Ifood produtos;
 
     printf("\n\nDigite o nome do produto: ");
@@ -42,8 +43,6 @@ Ifood cadastrarProdutos() {
     fgets(produtos.descricao, 300, stdin);
 
     produtos.descricao[strcspn(produtos.descricao, "\n")] = '\0';
-
-    produtos.ID = idProduto++;
 
     printf("Digite o preco do produto: ");
     scanf("%f", &produtos.preco);
@@ -57,8 +56,12 @@ Ifood editarProdutos() {
 
 Clientes cadastrarClientes() {
 
-    static int idCliente = 1;
+    srand(time(NULL));
+    int numAleatorio = rand() % 1000 + 1;
+
     Clientes customers;
+
+    customers.ID = numAleatorio;
 
     printf("\n\nDigite o nome do cliente: ");
     fgets(customers.nome, 30, stdin);
@@ -74,10 +77,6 @@ Clientes cadastrarClientes() {
     fgets(customers.email, 100, stdin);
 
     customers.email[strcspn(customers.email, "\n")] = '\0';
-
-    customers.ID = idCliente++;
-
-    customers.telefone = 0;
 
     printf("Digite seu telefone: ");
     scanf("%d", &customers.telefone);
@@ -175,12 +174,23 @@ int main() {
         } else if (caso == 4) {
 
         } else if (caso == 5) {
-            cliente = fopen("cadastroCliente.txt", "r+");
+            cliente = fopen("cadastroCliente.txt", "r");
             char c;
             do {
                 c = fgetc(cliente);
                 printf("%c", c);
             } while (c != EOF);
+
+            int IDescolhido;
+            printf("\n\nPara realizar um pedido escolha um cliente pelo seu ID: ");
+            scanf("%d", &IDescolhido);
+
+            printf("O usuario escolhido foi:\n");
+            for (int i = 0; i < 1000; i++) {
+                if (IDescolhido == customers.ID) {
+                    printf("");
+                }
+            }
         }
 
     }
