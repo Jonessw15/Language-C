@@ -1,3 +1,5 @@
+/* srand(time(NULL));
+        int numeroAleatorio = rand() % 1000 + 1; */
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -14,8 +16,8 @@ typedef struct {
     char nome[30];
     char endereco[50];
     char email[100];
+    char telefone[30];
     int ID;
-    int telefone;
 } Clientes;
 
 typedef struct {
@@ -26,69 +28,20 @@ typedef struct {
     float pedidoValor;
 } Pedidos;
 
-/* FUNÇÕES */
+void perguntas();
+void selecionarFuncao(int);
+void listaClientes();
+int cadastrarClientes();
 
-void organizarPerguntas(int);
-
-Ifood cadastrarProdutos() {
-
-    Ifood produtos;
-
-    printf("\n\nDigite o nome do produto: ");
-    fgets(produtos.nomeProduto, 50, stdin);
-
-    produtos.nomeProduto[strcspn(produtos.nomeProduto, "\n")] = '\0';
-
-    printf("Digite uma descricao desse produto: ");
-    fgets(produtos.descricao, 300, stdin);
-
-    produtos.descricao[strcspn(produtos.descricao, "\n")] = '\0';
-
-    printf("Digite o preco do produto: ");
-    scanf("%f", &produtos.preco);
-
-    return produtos;
-}
-
-Ifood editarProdutos() {
-
-}
-
-Clientes cadastrarClientes() {
-
-    srand(time(NULL));
-    int numAleatorio = rand() % 1000 + 1;
-
-    Clientes customers;
-
-    customers.ID = numAleatorio;
-
-    printf("\n\nDigite o nome do cliente: ");
-    fgets(customers.nome, 30, stdin);
-
-    customers.nome[strcspn(customers.nome, "\n")] = '\0';
-
-    printf("Digite o seu endereco: ");
-    fgets(customers.endereco, 50, stdin);
-
-    customers.endereco[strcspn(customers.endereco, "\n")] = '\0';
-
-    printf("Digite seu e-mail: ");
-    fgets(customers.email, 100, stdin);
-
-    customers.email[strcspn(customers.email, "\n")] = '\0';
-
-    printf("Digite seu telefone: ");
-    scanf("%d", &customers.telefone);
-
-    getchar();
-
-    return customers;
-
-}
+/* VARIAVEIS GLOBAIS */
+int tamanho = 1000;
+Clientes list[1000];
+int quantidade = 0;
+int caso = 0;
 
 int main() {
 
+    /* CRIAÇÃO DE ARQUIVOS PARA O PROGRAMA */
     FILE *arquivo = fopen("cadastro.txt", "a+");
     FILE *cliente = fopen("cadastroCliente.txt", "a+");
 
@@ -108,97 +61,73 @@ int main() {
         return 2;
     }
 
-    int caso = 0;
-
-    while (caso != 11) {
-        Ifood produtos;
-        Clientes customers;
-        Pedidos pedido;
-
-        /* ÁREA DE PERGUNTAS */
-
-        printf("\nO que voce deseja, meu nobre?\n\n");
-        printf("1) Cadastrar produtos\n");
-        printf("2) Lista produtos\n");
-        printf("3) Cadastrar clientes\n");
-        printf("4) Lista de clientes\n");
-        printf("5) Realizar um pedido\n");
-        printf("11) Sair do programa >_<");
-
-        printf("\nEscolha: ");
-        scanf("%d", &caso);
-
-        system("cls");
-        getchar();
-
-        /* system("color 3f");
-        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 5); */
-
-        switch (caso) {
-            case 1:
-                printf("\nCadastro de produtos");
-                break;
-            case 2:
-                printf("\nLista de produtos");
-                break;
-            case 3:
-                printf("\nCadastro de clientes");
-                break;
-            case 4:
-                printf("\nLista de clientes");
-                break;
-            case 5:
-                printf("\nRealizar pedido");
-                break;
-            case 11:
-                printf("Tchau\n");
-                break;
-            default:
-                printf("Nada escolhido\n");
-                break;
-        }
-
-        if (caso == 1) {
-            produtos = cadastrarProdutos();
-            fprintf(arquivo, "\n\nID do produto: %d\nNome do produto: %s\nDescricao do produto: %s\nPreco do produto: %.2f",produtos.ID, produtos.nomeProduto, produtos.descricao, produtos.preco);
-        } else if (caso == 2) {
-            arquivo = fopen("cadastro.txt", "r");
-            char c;
-            do {
-                c = fgetc(arquivo);
-                printf("%c", c);
-            } while (c != EOF);
-        } else if (caso == 3) {
-            customers = cadastrarClientes();
-            fprintf(cliente, "\n\nID do cliente: %d\nNome do cliente: %s\nE-mail do cliente: %s\nEndereco do cliente: %s\nTelefone do cliente: %d",customers.ID, customers.nome, customers.email, customers.endereco, customers.telefone);
-        } else if (caso == 4) {
-
-        } else if (caso == 5) {
-            cliente = fopen("cadastroCliente.txt", "r");
-            char c;
-            do {
-                c = fgetc(cliente);
-                printf("%c", c);
-            } while (c != EOF);
-
-            int IDescolhido;
-            printf("\n\nPara realizar um pedido escolha um cliente pelo seu ID: ");
-            scanf("%d", &IDescolhido);
-
-            printf("O usuario escolhido foi:\n");
-            for (int i = 0; i < 1000; i++) {
-                if (IDescolhido == customers.ID) {
-                    printf("");
-                }
-            }
-        }
-
-    }
+    /* INÍCIO DO PROJETO NA FUNÇÃO PRINCIPAL */
+    perguntas();
+    printf("Obrigado pela visita");
 
     fclose(arquivo);
+    fclose(cliente);
 
-    printf("\n\nObrigado pela preferencia");
+}
 
-    return 0;
+void perguntas() {
+    while (caso != 11) {
 
+    }
+}
+
+void selecionarFuncao(int opcao) {
+    if (opcao == 3) {
+        printf("\nCadastro de clientes\n\n");
+        cadastrarClientes();
+    } else if (opcao == 4) {
+        listaClientes();
+    }
+    caso = 0;
+    perguntas();
+}
+
+int cadastrarClientes() {
+    /* Enquanto a quantidade for menor que o tamanho
+       o sistema entenderá que ainda a espaço para mais
+       cadastros */
+    /* Nesse if o 'quantidade' serve, também, como
+       posição do vetor :) */
+    if (quantidade < tamanho) {
+        Clientes customers;
+        getchar();
+        printf("Digite o nome do cliente: ");
+        fgets(customers.nome, 30, stdin);
+
+        customers.nome[strcspn(customers.nome, "\n")] = '\0';
+
+        printf("Digite o seu endereco: ");
+        fgets(customers.email, 50, stdin);
+
+
+        printf("Digite seu numero de telefone: ");
+        fgets(customers.telefone, 30, stdin);
+
+        getchar();
+
+        list[quantidade] = customers;
+
+/*         fprintf(cliente, "\n\nID do cliente: %d\nNome do cliente: %s\nE-mail do cliente: %s\nEndereco do cliente: %s\nTelefone do cliente: %s",list[i].ID, list[i].nome, list[i].email, list[i].endereco, list[i].telefone);
+ */        quantidade++;
+        return 1;
+    } else {
+        printf("O sistema alcancou o limite maximo.\nPara contratar mais servicos ligue 4002-8922");
+        return 0;
+    }
+}
+
+void listaClientes() {
+    printf("Lista de clientes\n");
+    for (int i = 0; i < quantidade; i++) {
+        printf("\nID do cliente: %d\n", list[i].ID);
+        printf("Nome do cliente: %s\n", list[i].nome);
+        printf("Endereco do cliente: %s\n", list[i].endereco);
+        printf("Telefone do cliente: %s\n", list[i].telefone);
+    }
+    printf("\n");
 }

@@ -1,0 +1,13 @@
+
+
+ID do cliente: 933
+Nome do cliente: kdjsha
+E-mail do cliente: gdsa
+Endereco do cliente: jdashdj
+Telefone do cliente: 214307968
+
+ID do cliente: 57
+Nome do cliente: dsadsj
+E-mail do cliente: dasa
+Endereco do cliente: jdska
+Telefone do cliente: -405597056
