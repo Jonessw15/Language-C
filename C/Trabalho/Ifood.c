@@ -1,5 +1,3 @@
-/* srand(time(NULL));
-        int numeroAleatorio = rand() % 1000 + 1; */
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -31,6 +29,7 @@ typedef struct {
 void perguntas();
 void selecionarFuncao(int);
 void listaClientes();
+void listaClientesArquivo();
 int cadastrarClientes();
 
 /* VARIAVEIS GLOBAIS */
@@ -112,6 +111,8 @@ void selecionarFuncao(int opcao) {
         cadastrarClientes();
     } else if (opcao == 4) {
         listaClientes();
+    } else if (opcao == 5) {
+        listaClientesArquivo();
     }
     caso = 0;
     perguntas();
@@ -147,7 +148,7 @@ int cadastrarProdutos(){
 }
 //LISTAR PRODUTOS QUE O CLAITON FEZ
 void listaProdutos(){
-    for (int i = 0; i < quantidade; i++) {
+    for (int i = 0; i < quantidadeProdutos; i++) {
         printf("\nID do Produto: %d\n", listProd[i].ID);
         printf("Nome do produto: %s\n", listProd[i].nomeProduto);
         printf("Descricao do produto: %s\n", listProd[i].descricao);
@@ -162,9 +163,16 @@ int cadastrarClientes() {
        cadastros */
     /* Nesse if o 'quantidade' serve, também, como
        posição do vetor :) */
+       FILE *cliente = fopen("cadastroCliente.txt", "a+");
+
+    srand(time(NULL));
+    int numeroAleatorio = rand() % 1000 + 1;
+
     if (quantidade < tamanho) {
         Clientes customers;
         getchar();
+        customers.ID = numeroAleatorio;
+
         printf("Digite o nome do cliente: ");
         fgets(customers.nome, 30, stdin);
 
@@ -184,11 +192,15 @@ int cadastrarClientes() {
         fgets(customers.telefone, 30, stdin);
 
         customers.telefone[strcspn(customers.telefone, "\n")] = '\0';
-
+        
+        list[quantidade].ID = numeroAleatorio;
         list[quantidade] = customers;
 
-/*         fprintf(cliente, "\n\nID do cliente: %d\nNome do cliente: %s\nE-mail do cliente: %s\nEndereco do cliente: %s\nTelefone do cliente: %s",list[i].ID, list[i].nome, list[i].email, list[i].endereco, list[i].telefone);
- */        quantidade++;
+        fprintf(cliente, "%d\n", quantidade);
+        fprintf(cliente, "%d\n %s\n %s\n %s\n %s\n\n", list[quantidade].ID, list[quantidade].nome, list[quantidade].email, list[quantidade].endereco, list[quantidade].telefone);
+        quantidade++;
+
+        fclose(cliente);
         return 1;
     } else {
         printf("O sistema alcancou o limite maximo.\nPara contratar mais servicos ligue 4002-8922");
@@ -202,7 +214,60 @@ void listaClientes() {
         printf("\nID do cliente: %d\n", list[i].ID);
         printf("Nome do cliente: %s\n", list[i].nome);
         printf("Endereco do cliente: %s\n", list[i].endereco);
-        printf("Telefone do cliente: %s\n", list[i].telefone);
+        printf("E-mail do cliente: %s\n", list[i].email);
+        printf("Telefone do cliente: %s\n\n", list[i].telefone);
     }
     printf("\n");
+    int IDescolhido;
+    printf("Deseja editar algum usuario? Digite seu ID se sim ou '0' para nao: ");
+    scanf("%d", &IDescolhido);
+
+    FILE *cliente = fopen("cadastroCliente.txt", "r+");
+
+    for (int i = 0; i < quantidade; i++) {
+        int continua = 0; 
+        if (IDescolhido == list[i].ID) {
+            printf("Edicao do usuario: %s\n\n", list[i].nome);
+            printf("Deseja mudar seu nome? Digite '1' para nao ou qualquer numero para continuar ");
+            scanf("%d", &continua);
+            if (continua == 1) {
+                continue;
+            } else {
+                getchar();
+
+                printf("Edite seu nome: ");
+                fgets(list[i].nome, 30, stdin);
+
+                list[i].nome[strcspn(list[i].nome, "\n")] = '\0';
+
+                fprintf(cliente, "%s\n", list[i].nome);
+
+            }
+        }
+    }
+
+}
+
+void listaClientesArquivo() {
+    FILE *arquivo = fopen("cadastroCliente.txt", "r");
+    if (arquivo) {
+        fscanf(arquivo, "%d\n", &quantidade);
+        for (int i = 0; i < quantidade; i++) {
+            Clientes customers;
+            fscanf(arquivo, "%d\n", &customers.ID);
+            fgets(customers.nome, 30, arquivo);
+            customers.nome[strcspn(customers.nome, "\n")] = '\0';
+            fgets(customers.endereco, 50, arquivo);
+            customers.endereco[strcspn(customers.endereco, "\n")] = '\0';
+            fgets(customers.email, 100, arquivo);
+            customers.email[strcspn(customers.email, "\n")] = '\0';
+            fgets(customers.telefone, 30, arquivo);
+            customers.telefone[strcspn(customers.telefone, "\n")] = '\0';
+            list[i] = customers;
+        }
+        
+        fclose(arquivo);
+    } else {
+        printf("ERRO");
+    }
 }
