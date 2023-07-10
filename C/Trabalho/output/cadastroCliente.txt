@@ -1,4 +1,5 @@
-Nome editado para 
+Jones
+itado para 
 
  do cliente: 73
 Nome do cliente: asjda
@@ -146,4 +147,18 @@ ID do cliente: 429
 Nome do cliente: dhsadas
 E-mail do cliente: ajdn
 Endereco do cliente: dksa
-Telefone do cliente: 321
+Telefone do cliente: 3210
+165
+ Jone
+ kasdjd@kdf
+ mulunug
+ 2312
+
+0
+603
+ Jones
+ jones@gmail.com
+ Mulungu
+ 88992723049
+
+John

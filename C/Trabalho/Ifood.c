@@ -192,7 +192,7 @@ int cadastrarClientes() {
         fgets(customers.telefone, 30, stdin);
 
         customers.telefone[strcspn(customers.telefone, "\n")] = '\0';
-        
+
         list[quantidade].ID = numeroAleatorio;
         list[quantidade] = customers;
 
@@ -225,26 +225,80 @@ void listaClientes() {
     FILE *cliente = fopen("cadastroCliente.txt", "r+");
 
     for (int i = 0; i < quantidade; i++) {
-        int continua = 0; 
+        
+        int continua = 0;
+        int cont = quantidade;
         if (IDescolhido == list[i].ID) {
             printf("Edicao do usuario: %s\n\n", list[i].nome);
-            printf("Deseja mudar seu nome? Digite '1' para nao ou qualquer numero para continuar ");
+            printf("Deseja realmente editar? Digite '1' para nao ou qualquer numero para continuar ");
             scanf("%d", &continua);
+
+            system("cls");
+
             if (continua == 1) {
                 continue;
             } else {
                 getchar();
 
-                printf("Edite seu nome: ");
-                fgets(list[i].nome, 30, stdin);
+                int op;
+                printf("Caso queira editar um certo valor digite '0'\n\n");
+                fprintf(cliente, "%d\n", cont);
+                fprintf(cliente, "%d\n", list[i].ID);
+                printf("Deseja editar seu nome? ");
+                scanf("%d", &op);
+
+                if (op == 0) {
+                    getchar();
+                    printf("Edite seu nome: ");
+                    fgets(list[i].nome, 30, stdin);
+                    op = 1;
+                }
+
+                printf("Deseja editar seu endereco? ");
+                scanf("%d", &op);
+                
+                if (op == 0) {
+                    getchar();
+                    printf("Edite seu endereco: ");
+                    fgets(list[i].endereco, 30, stdin);
+                    op = 1;
+                }
+
+                printf("Deseja editar seu e-mail? ");
+                scanf("%d", &op);
+
+                if (op == 0) {
+                    getchar();
+                    printf("Edite seu e-mail: ");
+                    fgets(list[i].email, 30, stdin);
+                    op = 1;
+                }      
+
+                printf("Deseja editar seu telefone? ");
+                scanf("%d", &op);
+
+                if (op == 0) {
+                    getchar();
+                    printf("Edite seu telefone: ");
+                    fgets(list[i].telefone, 30, stdin);
+                    op = 1;
+                }      
 
                 list[i].nome[strcspn(list[i].nome, "\n")] = '\0';
+                list[i].endereco[strcspn(list[i].endereco, "\n")] = '\0';
+                list[i].email[strcspn(list[i].email, "\n")] = '\0';
+                list[i].telefone[strcspn(list[i].telefone, "\n")] = '\0';
 
                 fprintf(cliente, "%s\n", list[i].nome);
+                fprintf(cliente, "%s\n", list[i].endereco);
+                fprintf(cliente, "%s\n", list[i].email);
+                fprintf(cliente, "%s\n\n\n", list[i].telefone);
 
             }
         }
     }
+
+
 
 }
 
@@ -265,7 +319,7 @@ void listaClientesArquivo() {
             customers.telefone[strcspn(customers.telefone, "\n")] = '\0';
             list[i] = customers;
         }
-        
+
         fclose(arquivo);
     } else {
         printf("ERRO");
