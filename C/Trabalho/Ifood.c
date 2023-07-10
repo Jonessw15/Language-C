@@ -26,6 +26,7 @@ typedef struct {
     float pedidoValor;
 } Pedidos;
 
+void quantidadeDeNum();
 void perguntas();
 void selecionarFuncao(int);
 void listaClientes();
@@ -72,6 +73,15 @@ int main() {
     fclose(arquivo);
     fclose(cliente);
 
+}
+
+void quantidadeDeNum() {
+    FILE *arq = fopen("cadastroCliente.txt", "w");
+
+    fprintf(arq, "%d\n", quantidade);
+    for (int i = 0; i < quantidade; i++) {
+        fprintf(arq, "%d\n %s\n %s\n %s\n %s\n\n", list[i].ID, list[i].nome, list[i].email, list[i].endereco, list[i].telefone);
+    }
 }
 
 void perguntas() {
@@ -163,11 +173,14 @@ int cadastrarClientes() {
        cadastros */
     /* Nesse if o 'quantidade' serve, também, como
        posição do vetor :) */
-       FILE *cliente = fopen("cadastroCliente.txt", "a+");
+    listaClientesArquivo();
+    
+    FILE *cliente = fopen("cadastroCliente.txt", "a+");
 
     srand(time(NULL));
     int numeroAleatorio = rand() % 1000 + 1;
-
+    
+    fprintf(cliente, "%d\n", quantidade + 1);
     if (quantidade < tamanho) {
         Clientes customers;
         getchar();
@@ -196,19 +209,21 @@ int cadastrarClientes() {
         list[quantidade].ID = numeroAleatorio;
         list[quantidade] = customers;
 
-        fprintf(cliente, "%d\n", quantidade);
         fprintf(cliente, "%d\n %s\n %s\n %s\n %s\n\n", list[quantidade].ID, list[quantidade].nome, list[quantidade].email, list[quantidade].endereco, list[quantidade].telefone);
         quantidade++;
 
         fclose(cliente);
+        quantidadeDeNum();
         return 1;
     } else {
         printf("O sistema alcancou o limite maximo.\nPara contratar mais servicos ligue 4002-8922");
         return 0;
     }
+
 }
 
 void listaClientes() {
+    listaClientesArquivo();
     printf("Lista de clientes\n");
     for (int i = 0; i < quantidade; i++) {
         printf("\nID do cliente: %d\n", list[i].ID);
@@ -223,6 +238,7 @@ void listaClientes() {
     scanf("%d", &IDescolhido);
 
     FILE *cliente = fopen("cadastroCliente.txt", "r+");
+    FILE *arquivo = fopen("cadastroCliente.txt", "w");
 
     for (int i = 0; i < quantidade; i++) {
         
@@ -242,7 +258,6 @@ void listaClientes() {
 
                 int op;
                 printf("Caso queira editar um certo valor digite '0'\n\n");
-                fprintf(cliente, "%d\n", cont);
                 fprintf(cliente, "%d\n", list[i].ID);
                 printf("Deseja editar seu nome? ");
                 scanf("%d", &op);
@@ -294,12 +309,26 @@ void listaClientes() {
                 fprintf(cliente, "%s\n", list[i].email);
                 fprintf(cliente, "%s\n\n\n", list[i].telefone);
 
+                fclose(cliente);
             }
-        }
     }
-
-
-
+    if (IDescolhido != list[i].ID) {
+        fprintf(arquivo, "%d\n", list[i].ID);
+        fprintf(arquivo, "%s\n", list[i].nome);
+        fprintf(arquivo, "%s\n", list[i].endereco);
+        fprintf(arquivo, "%s\n", list[i].email);
+        fprintf(arquivo, "%s\n\n\n", list[i].telefone);
+        quantidadeDeNum();
+    } else {
+        fprintf(arquivo, "%d\n", list[i].ID);
+        fprintf(arquivo, "%s\n", list[i].nome);
+        fprintf(arquivo, "%s\n", list[i].endereco);
+        fprintf(arquivo, "%s\n", list[i].email);
+        fprintf(arquivo, "%s\n\n\n", list[i].telefone);    
+        quantidadeDeNum();
+    }
+    }
+    quantidadeDeNum();
 }
 
 void listaClientesArquivo() {
@@ -321,6 +350,8 @@ void listaClientesArquivo() {
         }
 
         fclose(arquivo);
+        int cont = quantidade;
+        printf("%d", cont);
     } else {
         printf("ERRO");
     }

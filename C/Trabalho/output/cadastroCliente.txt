@@ -1,164 +1,21 @@
-Jones
-itado para 
-
- do cliente: 73
-Nome do cliente: asjda
-E-mail do cliente: disaj
-Endereco do cliente: jasjh
-Telefone do cliente: 12 do cliente: 57
-Nome do cliente: dsadsj
-E-mail do cliente: dasa
-Endereco do cliente: jdska
-Telefone do cliente: -405597056
-
-ID do cliente: 52
-Nome do cliente: djsada
-E-mail do cliente: djas
-Endereco do cliente: jdsak
-Telefone do cliente: 2132
-
-ID do cliente: 52
-Nome do cliente: kdja
-E-mail do cliente: dasj
-Endereco do cliente: dsaj
-Telefone do cliente: 2131
-
-ID do cliente: 91
-Nome do cliente: jdsa
-E-mail do cliente: dsa
-Endereco do cliente: dhsa
-Telefone do cliente: 321312
-
-ID do cliente: 91
-Nome do cliente: hdsa
-E-mail do cliente: dsa
-Endereco do cliente: hdsa
-Telefone do cliente: 21
-
-ID do cliente: 500
-Nome do cliente: udsaja
-E-mail do cliente: dhsa
-Endereco do cliente: disha
-Telefone do cliente: 321
-
-ID do cliente: 85
-Nome do cliente: khsad
-E-mail do cliente: djsah
-Endereco do cliente: dsa
-Telefone do cliente: 23
-
-ID do cliente: 755
-Nome do cliente: sdhada
-E-mail do cliente: dbsa
-Endereco do cliente: djsahd
-Telefone do cliente: 23132
-
-ID do cliente: 511
-Nome do cliente: dsa
-E-mail do cliente: dha
-Endereco do cliente: dsah
-Telefone do cliente: 231
-
-ID do cliente: 562
-Nome do cliente: jones
-E-mail do cliente: jones@gmail,com
-Endereco do cliente: mulungu
-Telefone do cliente: 3131212
-
-ID do cliente: 251
-Nome do cliente: cdjn
-E-mail do cliente: kdja
-Endereco do cliente: kdf
-Telefone do cliente: 2313
-
-ID do cliente: 77
-Nome do cliente: jfdsf
-E-mail do cliente: fds
-Endereco do cliente: fjsjdf
-Telefone do cliente: 3231
-
-ID do cliente: 77
-Nome do cliente: dfksj
-E-mail do cliente: fdsj
-Endereco do cliente: fsdj
-Telefone do cliente: 342
-
-ID do cliente: 77
-Nome do cliente: aksjd
-E-mail do cliente: euqwh
-Endereco do cliente: oashd
-Telefone do cliente: 3231
-
-ID do cliente: 356
-Nome do cliente: djfs
-E-mail do cliente: dsah
-Endereco do cliente: dhsa
-Telefone do cliente: 312312
-
-ID do cliente: 28
-Nome do cliente: sdha
-E-mail do cliente: dsna
-Endereco do cliente: dsna
-Telefone do cliente: 32112
-
-ID do cliente: 697
-Nome do cliente: dahda
-E-mail do cliente: dsah
-Endereco do cliente: dsadh
-Telefone do cliente: 1231
-
-ID do cliente: 596
-Nome do cliente: dhasd
-E-mail do cliente: dash
-Endereco do cliente: sadh
-Telefone do cliente: 321231
-
-ID do cliente: 634
-Nome do cliente: dashda
-E-mail do cliente: dasd
-Endereco do cliente: das
-Telefone do cliente: 312
-
-ID do cliente: 672
-Nome do cliente: jksdha
-E-mail do cliente: dsa
-Endereco do cliente: dajsh
-Telefone do cliente: 1231
-
-ID do cliente: 621
-Nome do cliente: djansd
-E-mail do cliente: dada
-Endereco do cliente: da
-Telefone do cliente: 231
-
-ID do cliente: 416
-Nome do cliente: jdsha
-E-mail do cliente: dsan
-Endereco do cliente: dajsb
-Telefone do cliente: 3112
-
-ID do cliente: 709
-Nome do cliente: jhsdda
-E-mail do cliente: dsajjd
-Endereco do cliente: djsad
-Telefone do cliente: 231
-
-ID do cliente: 429
-Nome do cliente: dhsadas
-E-mail do cliente: ajdn
-Endereco do cliente: dksa
-Telefone do cliente: 3210
-165
- Jone
- kasdjd@kdf
- mulunug
- 2312
-
 0
-603
+398
  Jones
- jones@gmail.com
- Mulungu
- 88992723049
+ das
+ dsad
+ 3211
 
-John
+1
+467
+ fsdf
+ wefs
+ fds
+ 321
+
+1
+598
+ fdsf
+ fsj
+ fsdf
+ 3
+
