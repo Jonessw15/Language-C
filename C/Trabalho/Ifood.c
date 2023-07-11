@@ -6,8 +6,8 @@
 typedef struct {
     char nomeProduto[50];
     char descricao[300];
+    char preco[30];
     int ID;
-    float preco;
 } Ifood;
 
 typedef struct {
@@ -20,26 +20,45 @@ typedef struct {
 
 typedef struct {
     char status[50];
+    char pedidoValor[30];
     int ID;
     Clientes idCliente;
     int dia, mes, ano;
-    float pedidoValor;
 } Pedidos;
 
-void quantidadeDeNum();
+typedef struct {
+    char nomeCliente[30];
+    char nomeProduto[30];
+    int IDcliente;
+    int IDproduto;
+} SalvarPedidos;
+
+void quantidadeDeNumClientes();
+void quantidadeDeNumProdutos();
+void quantidadeDeNumPedidos();
 void perguntas();
 void selecionarFuncao(int);
 void listaClientes();
+void editaClientes();
 void listaClientesArquivo();
+void listaProdutos();
+void editaProdutos();
+void listaProdutosArquivos();
+void lerPedidos();
+void realizarPedido();
+void listarPedidosArquivos();
 int cadastrarClientes();
+int cadastrarProdutos();
 
 /* VARIAVEIS GLOBAIS */
 int tamanho = 1000;
 Clientes list[1000];
 Ifood listProd[1000];
+SalvarPedidos listSave[1000];
 int quantidade = 0;
 int caso = 0;
 int quantidadeProdutos = 0;
+int quantidadePedidos = 0;
 
 int main() {
 
@@ -75,7 +94,7 @@ int main() {
 
 }
 
-void quantidadeDeNum() {
+void quantidadeDeNumClientes() {
     FILE *arq = fopen("cadastroCliente.txt", "w");
 
     fprintf(arq, "%d\n", quantidade);
@@ -84,14 +103,33 @@ void quantidadeDeNum() {
     }
 }
 
+void quantidadeDeNumProdutos() {
+    FILE *arq = fopen("cadastro.txt", "w");
+
+    fprintf(arq, "%d\n", quantidadeProdutos);
+    for (int i = 0; i < quantidadeProdutos; i++) {
+        fprintf(arq, "%d\n%s\n%s\n%s\n", listProd[i].ID, listProd[i].nomeProduto, listProd[i].descricao, listProd[i].preco);
+    }
+}
+
+void quantidadeDeNumPedidos() {
+    FILE *arq = fopen("produtos.txt", "w");
+
+    fprintf(arq, "%d\n", quantidadePedidos);
+    for (int i = 0; i < quantidadePedidos; i++) {
+        fprintf(arq, "%d\n%s\n%d\n%s\n", listSave[i].IDcliente, listSave[i].nomeCliente, listSave[i].IDproduto, listSave[i].nomeProduto);
+    }
+//    for (int )
+}
+
 void perguntas() {
     while (caso > 0 || caso <= 11) {
         while (caso > 0 || caso <= 11) {
             printf("Bem vindo, meu consagrado\n\n");
             printf("1) Cadastro de Produtos\n");
-            printf("2) Listar Produtos\n");
+            printf("2) Editar Produtos\n");
             printf("3) Cadastro de Clientes\n");
-            printf("4) Listar Clientes\n");
+            printf("4) Editar Clientes\n");
             printf("5) Realiza Pedidos\n");
             printf("11) Sair do Programa\n\n");
             printf("Escolha: ");
@@ -115,14 +153,14 @@ void selecionarFuncao(int opcao) {
         cadastrarProdutos();
     } else if (opcao == 2) {
         printf("\nLista de produtos\n\n");
-        listaProdutos();
+        editaProdutos();
     } else if (opcao == 3) {
         printf("\nCadastro de clientes\n\n");
         cadastrarClientes();
     } else if (opcao == 4) {
-        listaClientes();
+        editaClientes();
     } else if (opcao == 5) {
-        listaClientesArquivo();
+        realizarPedido();
     }
     caso = 0;
     perguntas();
@@ -130,9 +168,15 @@ void selecionarFuncao(int opcao) {
 
 //FUNÇÃO DE CADASTRAR PRODUTOS QUE O CLAITON FEZ
 int cadastrarProdutos(){
+    listaProdutosArquivos();
+    srand(time(NULL));
+    FILE *produt = fopen("cadastro.txt", "a+");
+    int numeroAleatorio2 = rand() % 1000 + 1;
+
     if (quantidadeProdutos < tamanho) {
         Ifood produtos;
         getchar();
+        produtos.ID = numeroAleatorio2;
         printf("Digite o nome do produto: ");
         fgets(produtos.nomeProduto, 30, stdin);
 
@@ -143,28 +187,142 @@ int cadastrarProdutos(){
 
         produtos.descricao[strcspn(produtos.descricao, "\n")] = '\0';
 
-
         printf("Digite o preco do produto: ");
-        scanf("%f", &produtos.preco);
+        fgets(produtos.preco, 30, stdin);
 
-        getchar();
-        listProd[quantidade] = produtos;
+        produtos.preco[strcspn(produtos.preco, "\n")] = '\0';
+
+        listProd[quantidadeProdutos].ID = numeroAleatorio2;
+        listProd[quantidadeProdutos] = produtos;
+
+        fprintf(produt, "%d\n%s\n%s\n%s\n\n", listProd[quantidade].ID, listProd[quantidade].nomeProduto, listProd[quantidade].descricao, listProd[quantidade].preco);
         quantidadeProdutos++;
+        quantidadeDeNumProdutos();
         return 1;
+        fclose(produt);
     } else {
         printf("O sistema alcancou o limite maximo.\nPara contratar mais servicos ligue 4002-8922");
         return 0;
     }
 }
-//LISTAR PRODUTOS QUE O CLAITON FEZ
-void listaProdutos(){
-    for (int i = 0; i < quantidadeProdutos; i++) {
+
+void listaProdutos() {
+    listaProdutosArquivos();
+     for (int i = 0; i < quantidadeProdutos; i++) {
         printf("\nID do Produto: %d\n", listProd[i].ID);
         printf("Nome do produto: %s\n", listProd[i].nomeProduto);
         printf("Descricao do produto: %s\n", listProd[i].descricao);
-        printf("Preco do produto: %2.f\n", listProd[i].preco);
+        printf("Preco do produto: %s\n", listProd[i].preco);
     }
+}
+
+//LISTAR PRODUTOS QUE O CLAITON FEZ
+void editaProdutos(){
+    listaProdutosArquivos();
+    listaProdutos();
     printf("\n");
+
+    int IDescolhido;
+    printf("Deseja editar algum usuario? Digite seu ID se sim ou '0' para nao: ");
+    scanf("%d", &IDescolhido);
+
+    FILE *produto = fopen("cadastro.txt", "r+");
+    FILE *arquivo = fopen("cadastro.txt", "w");
+
+    for (int i = 0; i < quantidadeProdutos; i++) {
+
+        int continua = 0;
+        if (IDescolhido == listProd[i].ID) {
+            printf("Edicao do produto: %s\n\n", listProd[i].nomeProduto);
+            printf("Deseja realmente editar? Digite '1' para nao ou qualquer numero para continuar ");
+            scanf("%d", &continua);
+
+            system("cls");
+
+            if (continua == 1) {
+                continue;
+            } else {
+                getchar();
+
+                int op;
+                printf("Caso queira editar um certo valor digite '0'\n\n");
+                fprintf(produto, "%d\n", listProd[i].ID);
+                printf("Deseja editar seu nome? ");
+                scanf("%d", &op);
+
+                if (op == 0) {
+                    getchar();
+                    printf("Edite seu nome: ");
+                    fgets(listProd[i].nomeProduto, 30, stdin);
+                    op = 1;
+                }
+
+                printf("Deseja editar sua descricao? ");
+                scanf("%d", &op);
+
+                if (op == 0) {
+                    getchar();
+                    printf("Edite sua descricao: ");
+                    fgets(listProd[i].descricao, 300, stdin);
+                    op = 1;
+                }
+
+                printf("Deseja editar seu preco? ");
+                scanf("%d", &op);
+
+                if (op == 0) {
+                    getchar();
+                    printf("Edite seu preco: ");
+                    fgets(listProd[i].preco, 30, stdin);
+                }
+
+                listProd[i].nomeProduto[strcspn(listProd[i].nomeProduto, "\n")] = '\0';
+                listProd[i].descricao[strcspn(listProd[i].descricao, "\n")] = '\0';
+                listProd[i].preco[strcspn(listProd[i].preco, "\n")] = '\0';
+
+                fprintf(produto, "%s\n", listProd[i].nomeProduto);
+                fprintf(produto, "%s\n", listProd[i].descricao);
+                fprintf(produto, "%s\n", listProd[i].preco);
+
+                fclose(produto);
+            }
+            if (IDescolhido != list[i].ID) {
+                fprintf(arquivo, "%d\n", listProd[i].ID);
+                fprintf(arquivo, "%s\n", listProd[i].nomeProduto);
+                fprintf(arquivo, "%s\n", listProd[i].descricao);
+                fprintf(arquivo, "%s\n", listProd[i].preco);
+                quantidadeDeNumProdutos();
+            } else {
+                printf(arquivo, "%d\n", listProd[i].ID);
+                fprintf(arquivo, "%s\n", listProd[i].nomeProduto);
+                fprintf(arquivo, "%s\n", listProd[i].descricao);
+                fprintf(arquivo, "%s\n", listProd[i].preco);
+                quantidadeDeNumProdutos();
+            }
+        }
+        quantidadeDeNumProdutos();
+    }
+}
+
+void listaProdutosArquivos() {
+    FILE *arquivo = fopen("cadastro.txt", "r");
+    if (arquivo) {
+        fscanf(arquivo, "%d\n", &quantidadeProdutos);
+        for (int i = 0; i < quantidadeProdutos; i++) {
+            Ifood produtos;
+            fscanf(arquivo, "%d\n", &produtos.ID);
+            fgets(produtos.nomeProduto, 50, arquivo);
+            produtos.nomeProduto[strcspn(produtos.nomeProduto, "\n")] = '\0';
+            fgets(produtos.descricao, 300, arquivo);
+            produtos.descricao[strcspn(produtos.descricao, "\n")] = '\0';
+            fgets(produtos.preco, 30, arquivo);
+            produtos.preco[strcspn(produtos.preco, "\n")] = '\0';
+            listProd[i] = produtos;
+        }
+        fclose(arquivo);
+    } else {
+        printf("ERRO!");
+    }
 }
 
 int cadastrarClientes() {
@@ -174,12 +332,12 @@ int cadastrarClientes() {
     /* Nesse if o 'quantidade' serve, também, como
        posição do vetor :) */
     listaClientesArquivo();
-    
+
     FILE *cliente = fopen("cadastroCliente.txt", "a+");
 
     srand(time(NULL));
     int numeroAleatorio = rand() % 1000 + 1;
-    
+
     fprintf(cliente, "%d\n", quantidade + 1);
     if (quantidade < tamanho) {
         Clientes customers;
@@ -213,7 +371,7 @@ int cadastrarClientes() {
         quantidade++;
 
         fclose(cliente);
-        quantidadeDeNum();
+        quantidadeDeNumClientes();
         return 1;
     } else {
         printf("O sistema alcancou o limite maximo.\nPara contratar mais servicos ligue 4002-8922");
@@ -224,7 +382,6 @@ int cadastrarClientes() {
 
 void listaClientes() {
     listaClientesArquivo();
-    printf("Lista de clientes\n");
     for (int i = 0; i < quantidade; i++) {
         printf("\nID do cliente: %d\n", list[i].ID);
         printf("Nome do cliente: %s\n", list[i].nome);
@@ -232,6 +389,13 @@ void listaClientes() {
         printf("E-mail do cliente: %s\n", list[i].email);
         printf("Telefone do cliente: %s\n\n", list[i].telefone);
     }
+}
+
+void editaClientes() {
+    listaClientesArquivo();
+    printf("Lista de clientes\n");
+    listaClientes();
+
     printf("\n");
     int IDescolhido;
     printf("Deseja editar algum usuario? Digite seu ID se sim ou '0' para nao: ");
@@ -241,7 +405,7 @@ void listaClientes() {
     FILE *arquivo = fopen("cadastroCliente.txt", "w");
 
     for (int i = 0; i < quantidade; i++) {
-        
+
         int continua = 0;
         int cont = quantidade;
         if (IDescolhido == list[i].ID) {
@@ -271,7 +435,7 @@ void listaClientes() {
 
                 printf("Deseja editar seu endereco? ");
                 scanf("%d", &op);
-                
+
                 if (op == 0) {
                     getchar();
                     printf("Edite seu endereco: ");
@@ -287,7 +451,7 @@ void listaClientes() {
                     printf("Edite seu e-mail: ");
                     fgets(list[i].email, 30, stdin);
                     op = 1;
-                }      
+                }
 
                 printf("Deseja editar seu telefone? ");
                 scanf("%d", &op);
@@ -297,7 +461,7 @@ void listaClientes() {
                     printf("Edite seu telefone: ");
                     fgets(list[i].telefone, 30, stdin);
                     op = 1;
-                }      
+                }
 
                 list[i].nome[strcspn(list[i].nome, "\n")] = '\0';
                 list[i].endereco[strcspn(list[i].endereco, "\n")] = '\0';
@@ -318,17 +482,17 @@ void listaClientes() {
         fprintf(arquivo, "%s\n", list[i].endereco);
         fprintf(arquivo, "%s\n", list[i].email);
         fprintf(arquivo, "%s\n\n\n", list[i].telefone);
-        quantidadeDeNum();
+        quantidadeDeNumClientes();
     } else {
         fprintf(arquivo, "%d\n", list[i].ID);
         fprintf(arquivo, "%s\n", list[i].nome);
         fprintf(arquivo, "%s\n", list[i].endereco);
         fprintf(arquivo, "%s\n", list[i].email);
-        fprintf(arquivo, "%s\n\n\n", list[i].telefone);    
-        quantidadeDeNum();
+        fprintf(arquivo, "%s\n\n\n", list[i].telefone);
+        quantidadeDeNumClientes();
     }
     }
-    quantidadeDeNum();
+    quantidadeDeNumClientes();
 }
 
 void listaClientesArquivo() {
@@ -350,8 +514,104 @@ void listaClientesArquivo() {
         }
 
         fclose(arquivo);
-        int cont = quantidade;
-        printf("%d", cont);
+    } else {
+        printf("ERRO");
+    }
+}
+
+void lerPedidos() {
+
+}
+
+void realizarPedido() {
+    listaClientes();
+    listaClientesArquivo();
+    listaProdutosArquivos();
+    listarPedidosArquivos();
+    int IDescolhido;
+    printf("\nDeseja editar algum usuario? Digite seu ID se sim ou '0' para nao: ");
+    scanf("%d", &IDescolhido);
+        quantidadePedidos++;
+
+    FILE *arq = fopen("produtos.txt", "r");
+    FILE *produtos = fopen("produtos.txt", "w");
+
+    fprintf(arq, "%d\n", quantidadePedidos);
+    for (int i = 0; i < quantidade; i++) {
+
+        int continua = 0;
+        int cont = 0;
+
+        if (IDescolhido == list[i].ID) {
+            printf("Pedido para usuario: %s\n\n", list[i].nome);
+            printf("Deseja realmente fazer um pedido? Digite '1' para nao ou qualquer numero para continuar ");
+            scanf("%d", &continua);
+
+            system("cls");
+
+            if (continua == 1) {
+                quantidadePedidos--;
+                continue;
+            } else {
+
+                listSave[i].IDcliente = list[i].ID;
+                fprintf(produtos, "%d\n", listSave[i].IDcliente);
+                strcpy(listSave[i].nomeCliente, list[i].nome);
+                fprintf(produtos, "%s\n", listSave[i].nomeCliente);
+
+                listaProdutos();
+                int IDescolhidoProd;
+                printf("Selecione um produto pelo seu ID para inserir no seu pedido: ");
+                scanf("%d", &IDescolhidoProd);
+
+                for (int j = 0; j < quantidadeProdutos; j++) {
+                    if (IDescolhidoProd == listProd[j].ID) {
+                        listSave[i].IDproduto = listProd[i].ID;
+                        fprintf(produtos, "%d\n", listSave[i].IDproduto);
+                        strcpy(listSave[i].nomeProduto, listProd[i].nomeProduto);
+                        fprintf(produtos, "%s\n", listSave[i].nomeProduto);
+                    }
+                }
+
+                /* int op;
+                while (op != 0) {
+                    printf("Deseja adicionar mais algum produto? Se nao digite '0', se sim digite '1");
+                    scanf("%d", &op);
+
+                    if (op == 0) {
+                        break;
+                    }
+
+                    fprintf(arq, "%d\n", listProd[i].ID);
+                    fprintf(arq, "%s\n", listProd[i].nomeProduto);
+                } */
+                quantidadeDeNumPedidos();
+
+                fclose(arq);
+                fclose(produtos);
+            }
+        }
+        quantidadeDeNumPedidos();
+    }
+
+}
+
+void listarPedidosArquivos() {
+    FILE *arquivo = fopen("produtos.txt", "r");
+
+    if (arquivo) {
+        fscanf(arquivo, "%d\n", &quantidadePedidos);
+        for (int i = 0; i < quantidadePedidos; i++) {
+            SalvarPedidos save;
+            fscanf(arquivo, "%d\n", &save.IDcliente);
+            fgets(save.nomeCliente, 30, arquivo);
+            save.nomeCliente[strcspn(save.nomeCliente, "\n")] = '\0';
+            fscanf(arquivo, "%d\n", &save.IDproduto);
+            fgets(save.nomeProduto, 30, arquivo);
+            save.nomeProduto[strcspn(save.nomeProduto, "\n")] = '\0';
+            listSave[i] = save;
+        }
+        fclose(arquivo);
     } else {
         printf("ERRO");
     }
