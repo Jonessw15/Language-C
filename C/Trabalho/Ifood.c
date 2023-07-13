@@ -198,8 +198,8 @@ int cadastrarProdutos(){
         fprintf(produt, "%d\n%s\n%s\n%s\n\n", listProd[quantidade].ID, listProd[quantidade].nomeProduto, listProd[quantidade].descricao, listProd[quantidade].preco);
         quantidadeProdutos++;
         quantidadeDeNumProdutos();
-        return 1;
         fclose(produt);
+        return 1;
     } else {
         printf("O sistema alcancou o limite maximo.\nPara contratar mais servicos ligue 4002-8922");
         return 0;
