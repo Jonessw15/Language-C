@@ -520,7 +520,13 @@ void listaClientesArquivo() {
 }
 
 void lerPedidos() {
-
+    listarPedidosArquivos();
+    for (int i = 0; i < quantidade; i++) {
+        printf("\nID do cliente: %d\n", listSave[i].IDcliente);
+        printf("Nome do cliente: %s\n", listSave[i].nomeCliente);
+        printf("Endereco do cliente: %s\n", listSave[i].IDproduto);
+        printf("E-mail do cliente: %s\n", listSave[i].nomeProduto);
+    }
 }
 
 void realizarPedido() {
@@ -537,6 +543,7 @@ void realizarPedido() {
     FILE *produtos = fopen("produtos.txt", "w");
 
     fprintf(arq, "%d\n", quantidadePedidos);
+    lerPedidos();
     for (int i = 0; i < quantidade; i++) {
 
         int continua = 0;
